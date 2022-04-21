@@ -15,6 +15,7 @@
       </header>
       <section :class="animation">
         <h2>{{ formSteps[activeStep].title }}</h2>
+        <h1>{{ formSteps[activeStep].description }}</h1>
         <div class="input-fields">
           <div
             class="input-container"
@@ -60,7 +61,8 @@ export default {
       animation: "animate-in",
       formSteps: [
         {
-          title: "Questionary Title",
+          title: "PERSONAL INFORMATIONS",
+          description: "Please insert your personal informations",
           fields: [
             {
               label: "Name",
@@ -89,22 +91,47 @@ export default {
           ],
         },
         {
-          title: "CSS Quiz",
+          title: "PLANUNG UND KONZEPTION",
+          description: "Please evaluate the fields betwen 0 and 5",
           fields: [
             {
-              label: "What does CSS stand for?",
+              label: "NUTZUNG",
               value: "",
               valid: true,
               pattern: /.+/,
             },
             {
-              label: "HTML tag for an internal style sheet?",
+              label: "QUALITÄT",
               value: "",
               valid: true,
               pattern: /.+/,
             },
             {
-              label: "Property for the background color?",
+              label: "MACHINE LEARNING",
+              value: "",
+              valid: true,
+              pattern: /.+/,
+            },
+            {
+              label: "DIGITAL ENGINEERING",
+              value: "",
+              valid: true,
+              pattern: /.+/,
+            },
+            {
+              label: "SCHNITTSTELLE",
+              value: "",
+              valid: true,
+              pattern: /.+/,
+            },
+            {
+              label: "VARLANTEN",
+              value: "",
+              valid: true,
+              pattern: /.+/,
+            },
+            {
+              label: "ANFORDERUNG",
               value: "",
               valid: true,
               pattern: /.+/,
@@ -112,22 +139,47 @@ export default {
           ],
         },
         {
-          title: "CSS Quiz",
+          title: "PRODUKT UND PROZESSENTWICKLUNG",
+          description: "Please evaluate the fields betwen 0 and 5",
           fields: [
             {
-              label: "A second Step",
+              label: "ANFORDERUNG VON KUNDEN",
               value: "",
               valid: true,
               pattern: /.+/,
             },
             {
-              label: "A second Step",
+              label: "ANFORDERUNG",
               value: "",
               valid: true,
               pattern: /.+/,
             },
             {
-              label: "A second Step",
+              label: "DURCHFÜRUNG DER PROZESSE",
+              value: "",
+              valid: true,
+              pattern: /.+/,
+            },
+            {
+              label: "WISSENSMANAGMENT",
+              value: "",
+              valid: true,
+              pattern: /.+/,
+            },
+            {
+              label: "IT-INFRASTUKTUR",
+              value: "",
+              valid: true,
+              pattern: /.+/,
+            },
+            {
+              label: "PERSONELLE RESSOURCEN",
+              value: "",
+              valid: true,
+              pattern: /.+/,
+            },
+            {
+              label: "SINGLE POINT OF TRUTH",
               value: "",
               valid: true,
               pattern: /.+/,
@@ -135,25 +187,8 @@ export default {
           ],
         },
         {
-          title: "Your data",
-          fields: [
-            {
-              label: "Your first name?",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            { label: "Your last name?", value: "", valid: true, pattern: /.+/ },
-            {
-              label: "Your email?",
-              value: "",
-              valid: true,
-              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            },
-          ],
-        },
-        {
-          title: "Thank you for participating!",
+          title:
+            "Thank you for filling the questions, Click submit for the response!",
         },
       ],
     };
@@ -214,7 +249,7 @@ article {
   header {
     @include flexbox();
     width: 60px;
-    height: 480px;
+    height: flex;
     background-color: #fff;
     border-right: 2px inset rgb(25, 163, 94);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2);
@@ -268,8 +303,13 @@ article {
     h2 {
       font-size: 2rem;
       color: rgb(1, 71, 36);
+      margin: 0px;
+      padding-top: 20px;
+    }
+    h1 {
+      font-size: 0.8rem;
+      color: rgb(90, 94, 92);
       margin: 0;
-      padding: 20px;
     }
 
     .input-fields {
