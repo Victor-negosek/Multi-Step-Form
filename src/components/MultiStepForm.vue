@@ -22,30 +22,48 @@
             v-for="(field, index) in formSteps[activeStep].fields"
             :key="'field' + index"
           >
+            <h3>
+              {{ field.introduction }}
+            </h3>
             <label class="input-label">{{ field.label }}</label>
-            <input
-              type="text"
-              :class="{ 'wrong*-input': !field.valid }"
+            <v-slider
+              class="input-slider"
               v-model="field.value"
-              required
-            />
+              color="green"
+              :min="0"
+              :max="5"
+              :step="1"
+              :thumb-size="15"
+            >
+              <template v-slot:append>
+                <v-text-field
+                  v-model="field.value"
+                  label="Value"
+                  variant="plain"
+                ></v-text-field>
+              </template>
+            </v-slider>
           </div>
         </div>
         <div>
           <div class="actions">
-            <button v-if="activeStep + 1 != 1" @click="backStep">back</button>
-            <button
-              v-if="activeStep + 1 < formSteps.length - 1"
-              @click="checkFields"
+            <v-btn v-if="activeStep + 1 != 1" @click="backStep" color="error">
+              back
+            </v-btn>
+            <v-btn
+              v-if="activeStep < formSteps.length - 1"
+              @click="nextStep"
+              color="sucess"
             >
               next
-            </button>
-            <button
-              v-if="activeStep + 1 === formSteps.length - 1"
-              @click="checkFields"
+            </v-btn>
+            <v-btn
+              v-if="activeStep === formSteps.length - 1"
+              @click="nextStep"
+              color="info"
             >
               done
-            </button>
+            </v-btn>
           </div>
         </div>
       </section>
@@ -65,28 +83,15 @@ export default {
           description: "Please insert your personal informations",
           fields: [
             {
+              introduction: "Type the following informations:",
               label: "Name",
-              value: "",
-              valid: true,
-              pattern: /.+/,
+              value: 1,
+              comment: "optional brieth comment",
             },
             {
               label: "E-Mail",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "Phone-Number",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "Company",
-              value: "",
-              valid: true,
-              pattern: /.+/,
+              value: 1,
+              comment: "optional brieth comment",
             },
           ],
         },
@@ -96,93 +101,18 @@ export default {
           fields: [
             {
               label: "NUTZUNG",
-              value: "",
-              valid: true,
-              pattern: /.+/,
+              value: 1,
+              comment: "optional brieth comment",
             },
             {
               label: "QUALITÄT",
-              value: "",
-              valid: true,
-              pattern: /.+/,
+              value: 1,
+              comment: "optional brieth comment",
             },
             {
               label: "MACHINE LEARNING",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "DIGITAL ENGINEERING",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "SCHNITTSTELLE",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "VARLANTEN",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "ANFORDERUNG",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-          ],
-        },
-        {
-          title: "PRODUKT UND PROZESSENTWICKLUNG",
-          description: "Please evaluate the fields betwen 0 and 5",
-          fields: [
-            {
-              label: "ANFORDERUNG VON KUNDEN",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "ANFORDERUNG",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "DURCHFÜRUNG DER PROZESSE",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "WISSENSMANAGMENT",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "IT-INFRASTUKTUR",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "PERSONELLE RESSOURCEN",
-              value: "",
-              valid: true,
-              pattern: /.+/,
-            },
-            {
-              label: "SINGLE POINT OF TRUTH",
-              value: "",
-              valid: true,
-              pattern: /.+/,
+              value: 1,
+              comment: "optional brieth comment",
             },
           ],
         },
@@ -199,25 +129,6 @@ export default {
     },
     backStep() {
       this.activeStep -= 1;
-    },
-    checkFields() {
-      let valid = true;
-      this.formSteps[this.activeStep].fields.forEach((field) => {
-        if (!field.pattern.test(field.value)) {
-          valid = false;
-          field.valid = false;
-        } else {
-          field.valid = true;
-        }
-      });
-      if (valid) {
-        this.nextStep();
-      } else {
-        this.animation = "animate-wrong";
-        setTimeout(() => {
-          this.animation = "";
-        }, 400);
-      }
     },
   },
 };
@@ -243,8 +154,8 @@ article {
   display: flex;
   margin: 10px;
   width: calc(100% - 20px);
-  max-width: 720px;
-  min-height: 480px;
+  max-width: 1200px;
+  min-height: 280px;
 
   header {
     @include flexbox();
@@ -310,6 +221,7 @@ article {
       font-size: 0.8rem;
       color: rgb(90, 94, 92);
       margin: 0;
+      padding-bottom: 20px;
     }
 
     .input-fields {
@@ -320,9 +232,8 @@ article {
 
     .input-container {
       position: relative;
-      padding: 20px 20px 20px 20px;
+      padding: 1px 1pc 1px 1px;
       width: calc(100% - 40px);
-      max-width: 400px;
 
       input {
         position: relative;
@@ -333,19 +244,14 @@ article {
         outline: none;
         border: none;
         border-bottom: 1px inset rgb(25, 163, 94);
-
-        &:valid + .input-Label {
-          top: 10px;
-          left: 20px;
-          font-size: 0.7rem;
-          font-weight: normal;
-          color: #999;
-        }
-
-        &.wrong-input + .input-label {
-          color: #b92938;
-        }
       }
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      color: rgb(1, 71, 36);
+      margin: 0px;
+      padding-bottom: 10px;
     }
 
     .input-label {
@@ -353,6 +259,14 @@ article {
       font-size: 1rem;
       color: rgb(0, 0, 0);
       pointer-events: none;
+    }
+
+    .input-slider {
+      margin: 0px;
+      padding-right: 100 px;
+      left: 20px;
+      width: 100%;
+      height: 80px;
     }
 
     .actions {
@@ -365,7 +279,6 @@ article {
         color: #fff;
         background-color: rgb(25, 163, 94);
         font-size: 1.35rem;
-        padding: 5px 20px;
         margin: 40px;
         text-transform: uppercase;
         border-radius: 3px;
