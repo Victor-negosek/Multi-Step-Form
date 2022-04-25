@@ -1,0 +1,58 @@
+{
+  "formSteps": [
+    {
+      "id": 1,
+      "title": "PERSONAL INFORMATIONS",
+      "description": "Please insert your personal informations",
+      "header": "Considering the following questions:"
+    },
+    {
+      "id": 2,
+      "title": "PLANUNG UND KONZEPTION",
+      "description": "Please evaluate the fields betwen 0 and 5"
+    },
+    {
+      "id": 3,
+      "title": "Thank you for filling the questions, Click submit for the response!",
+      "description": "Please Check all the answers"
+    },
+    {
+      "id": 4,
+      "title": "Teste",
+      "description": "Please insert your personal informations",
+      "header": "Considering the following questions:"
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "phase_id": 1,
+      "value": 1,
+      "label": "Name"
+    },
+    {
+      "id": 2,
+      "phase_id": 1,
+      "value": 1,
+      "label": "E-Mail"
+    },
+    {
+      "id": 3,
+      "phase_id": 2,
+      "value": 1,
+      "label": "NUTZUNG"
+    },
+    {
+      "id": 4,
+      "phase_id": 2,
+      "value": 1,
+      "label": "QUALITÄT"
+    },
+    {
+      "id": 5,
+      "phase_id": 2,
+      "value": 1,
+      "label": "MACHINE LEARNING"
+    }
+  ]
+}
