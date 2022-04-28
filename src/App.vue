@@ -1,16 +1,11 @@
 <template>
-  <div id="app">
-    <MultiStepForm />
+  <div>
+    <router-view> </router-view>
   </div>
 </template>
 
 <script>
-import MultiStepForm from "./components/MultiStepForm.vue";
-export default {
-  components: {
-    MultiStepForm,
-  },
-};
+export default {};
 </script>
 
 <style lang="scss">

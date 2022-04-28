@@ -63,7 +63,8 @@
               </v-btn>
               <v-btn
                 v-if="activeStep === formSteps.length - 1"
-                @click="nextStep"
+                @click="submitStep"
+                href="/AboutPage"
                 color="info"
               >
                 done
@@ -82,6 +83,8 @@ export default {
     return {
       activeStep: 0,
       animation: "animate-in",
+      result_id: 1,
+      result: [],
       questions: [],
       formSteps: [],
     };
@@ -98,7 +101,30 @@ export default {
       .catch((err) => console.log(err.message));
   },
   methods: {
+    async submitStep() {
+      const res = await fetch("http://localhost:5000/results", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          body: JSON.stringify(this.result),
+        },
+        body: JSON.stringify(this.result),
+      });
+      const data = await res.json();
+
+      this.result = [...this.result, data];
+    },
     nextStep() {
+      for (const question of this.questions) {
+        if (question.phase_id - 1 == this.activeStep) {
+          const values = {
+            question: question.id,
+            pashe: question.phase_id,
+            score: question.value,
+          };
+          this.result[question.id] = values;
+        }
+      }
       this.activeStep += 1;
     },
     backStep() {
@@ -117,7 +143,7 @@ export default {
 .container {
   @include flexbox();
   width: 100%;
-  min-height: 100vh;
+  max-height: 100vh;
   font-family: "Noto Sans", sans-serif;
 }
 article {
